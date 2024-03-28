@@ -1,6 +1,6 @@
 -- fazendo o backup do banco de dados
 -- deve estar na tela de login do mysql
-mysqldump -u root --databases bancodb > D:\sql\bkp25587.sql
+mysqldump -u root --databases bancodb academico > D:\sql\bkp25587.sql
 
 -- para restaurar o backup de um banco de dados
 -- executar o comando a seguir de dentro do mysql
