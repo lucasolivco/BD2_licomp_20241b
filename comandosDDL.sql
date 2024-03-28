@@ -1,3 +1,17 @@
+--visualizando os bancos de dados instalados
+show databases;
+
+-- excluindo um banco de dados
+drop database bancoDB;
+
+-- criando um novo banco de dados
+create database bancoDB;
+
+-- acessando o banco de dados
+use bancoDB;
+
+
+
 -- criando a tabela bancos
 create table bancos (
     numero int not null,
@@ -11,11 +25,8 @@ use bancoDB
 -- criar o bancoDB
 create database bancoDB;
 
--- excluindo um banco de dados
-drop database exemplodb;
-
 -- acessando o banco de dados
-use exemplodb;
+use bancoDB;
 
 --criar a tabela agencias
 create table agencias (
@@ -53,3 +64,43 @@ git add .
 git commit -m "aula do dia 14/03"
 git remote add origin https://github.com/rosenclever/bancoDB
 git push -u origin master
+
+-- realizar o backup do banco
+--estando no shell do campp, fora do mysql, execute a instrução
+mysqldump bancodb -u root >
+e:\seunome\bkp_bancodb_1403.sql
+
+create table Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    City varchar(255),
+    CONSTRAINT CHK_Person CHECK (age>=18 AND City='sandnes')
+
+);
+
+-- fixacao adicionar dia e mes aniversario
+alter table clientes 
+add dia_niver int,
+add mes_niver int;
+
+desc clientes;
+
+-- fixacao regras
+alter table clientes
+add constraint dias_ck check (dia_niver >= 1 and dia_niver <= 31),
+add constraint mes_ck check (mes_niver >= 1 and mes_niver <= 12);
+
+alter table clientes add dia int default '01';
+alter table clientes add mes int default '01';
+alter table clientes add CONSTRAINT CHK_dia check (dia>=1 AND dia<=31);
+alter table clientes add CONSTRAINT CHK_mes check (mes>=1 AND mes<=12);
+
+-- fixacao produtos
+alter tables produtos 
+modify unidades varchar(50) default 'unidades';
+
+-- fazendo o backup do banco de dados
+-- deve estar na tela de login do mysql
+mysqldump -u root --databases bancodb > D:\sql\bkp25587.sql
