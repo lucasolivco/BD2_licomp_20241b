@@ -62,7 +62,7 @@ git config --global user.email
 "email"
 git add .
 git commit -m "aula do dia 14/03"
-git remote add origin https://github.com/rosenclever/bancoDB
+git remote add origin https://github.com/lucasolivco/BD2_licomp_20241b
 git push -u origin master
 
 -- realizar o backup do banco
