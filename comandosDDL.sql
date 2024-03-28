@@ -1,3 +1,12 @@
+-- fazendo o backup do banco de dados
+-- deve estar na tela de login do mysql
+mysqldump -u root --databases bancodb > D:\sql\bkp25587.sql
+
+-- para restaurar o backup de um banco de dados
+-- executar o comando a seguir de dentro do mysql
+-- executar este comando no início de cada aula
+source D:\sql\bkp25587.sql
+
 --visualizando os bancos de dados instalados
 show databases;
 
@@ -101,6 +110,40 @@ alter table clientes add CONSTRAINT CHK_mes check (mes>=1 AND mes<=12);
 alter tables produtos 
 modify unidades varchar(50) default 'unidades';
 
--- fazendo o backup do banco de dados
--- deve estar na tela de login do mysql
-mysqldump -u root --databases bancodb > D:\sql\bkp25587.sql
+-- correção dos exercícios dos slides 33 ao 35
+create database academico;
+use academico;
+
+create table intituicoes (
+    id integer not null, 
+    constraint intituicoes_pk primary key(id),
+    nome varchar(100) not null,
+    email varchar(100) not null,
+    constraint inst_email_uq unique(email)
+);
+
+alter table intituicoes
+add uf char(2) default 'RJ';
+
+create table professores(
+    prof_matr integer(6) not null,
+    constraint professores_pk primary key(prof_matr),
+    prof_nome varchar(100) not null, 
+    prof_email varchar(150) not null, 
+    constraint prof_email_uq unique(prof_email),
+    prof_salario decimal(18,2),
+    constraint prof_salario_ck check(prof_salario > 700) 
+);
+
+alter table professores
+add dia_niver int,
+add mes_niver int;
+
+alter table professores
+add constraint professores_dia_niver_ck
+    check(dia_niver >= 1 and dia_niver <= 31),
+add constraint professores_mes_niver_ck
+    check(mes_niver >= 1 and mes_niver < 13);    
+
+alter table professores
+add prof_cep char(7);      
